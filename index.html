@@ -16,8 +16,9 @@ document.addEventListener("DOMContentLoaded", function() {
     });
 
     function dragStart(e) {
-        e.dataTransfer.setData('text/plain', e.target.id);
-    }
+    e.dataTransfer.setData('text/plain', e.target.id);
+    e.target.style.border = 'none'; // Скрываем рамку при начале перетаскивания
+}
 
     function dragOver(e) {
         e.preventDefault();
@@ -162,6 +163,7 @@ predictionForm.addEventListener('submit', function(e) {
             border-radius: 8px;
             font-weight: bold; 
             width: 200px;
+            
         }
 
         /* .TITLE {
