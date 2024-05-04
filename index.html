@@ -40,40 +40,60 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     const predictionForm = document.getElementById('prediction-form');
-    predictionForm.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const nickname = document.getElementById('nickname').value;
-        const socialLink = document.getElementById('social-link').value;
-        const agree = document.getElementById('agree').checked;
-        const prediction = {
-            nickname,
-            socialLink,
-            agree,
-            selectedTeams 
-        };
+predictionForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const nickname = document.getElementById('nickname').value;
+    const socialLink = document.getElementById('social-link').value;
+    const agree = document.getElementById('agree').checked;
+    const prediction = {
+        nickname,
+        socialLink,
+        agree,
+        selectedTeams 
+    };
 
-        console.log(prediction);
+    console.log(prediction);
 
-        const finalTeams = selectedTeams.final; 
+    const finalTeams = selectedTeams.final; 
 
-        // Запись значений в переменные
-        const team1 = finalTeams[0];
-        const team2 = finalTeams[1];
-        const team3 = finalTeams[2];
+    // Запись значений в переменные
+    const team1 = finalTeams[0];
+    const team2 = finalTeams[1];
+    const team3 = finalTeams[2];
 
-        console.log("Первая команда в финале:", team1);
-        console.log("Вторая команда в финале:", team2);
-        console.log("Победитель:", team3);
-        console.log("Ник:", nickname);
-        console.log("Контакты:", socialLink);
+    console.log("Первая команда в финале:", team1);
+    console.log("Вторая команда в финале:", team2);
+    console.log("Победитель:", team3);
+    console.log("Ник:", nickname);
+    console.log("Контакты:", socialLink);
+
+    // Создание скрытых полей для передачи значений в форму
+    const team1Input = document.createElement('input');
+    team1Input.type = 'hidden';
+    team1Input.name = 'team1'; 
+    team1Input.value = team1; 
+
+    const team2Input = document.createElement('input');
+    team2Input.type = 'hidden';
+    team2Input.name = 'team2'; 
+    team2Input.value = team2; 
+
+    const team3Input = document.createElement('input');
+    team3Input.type = 'hidden';
+    team3Input.name = 'team3'; 
+    team3Input.value = team3; 
 
 
+    predictionForm.appendChild(team1Input);
+    predictionForm.appendChild(team2Input);
+    predictionForm.appendChild(team3Input);
 
-        // Отправка формы
-        setTimeout(function() {
-            predictionForm.submit();
-        }, 1000); // Задержка в 1000 миллисекунд (1 секунда)
-    });
+    setTimeout(function() {
+        predictionForm.submit();
+    }, 1000); 
+});
+
+
 });
 
         
@@ -256,9 +276,9 @@ document.addEventListener("DOMContentLoaded", function() {
     </div>
     
 
-          <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbwjc4Vcp7YNvXp8hjWiCzNmcBS5n43p9qZa5tW7_iPEALirZX3KTWtrz4whRiZql_n-/exec">
-            <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре" required>
-            <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
+          <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbxEOplw3KT7CKICx4hUa1lRks-jqxQ-gRuGNvUiKzf6jkhw82AwESIYWMSPKb912nZv/exec">
+            <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре:" required>
+            <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК):" required>
             <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
             <div class="checkbox-wrapper">
                 <input type="checkbox" id="agree" required>
