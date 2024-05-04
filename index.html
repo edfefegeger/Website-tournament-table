@@ -100,6 +100,34 @@
             text-align: center;
             margin-top: 50px;
         }
+        .input {
+    background-color: black;
+    color: aliceblue;
+    width: 295px;
+    height: 40px;
+    font-size: 14px; /* Установка размера текста */
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    
+}
+.agree
+{
+    color: aliceblue;
+}
+.imagine_button
+{
+    margin-left: 10px;
+    width: 295px;
+    height: 50px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 8px;
+    background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
+    color: aliceblue;
+    font-size: 20px;
+
+    font-weight: bolder;
+
+}
     </style>
 </head>
 <body>
@@ -135,10 +163,11 @@
     <!-- Форма для отправки прогнозов -->
     <form id="prediction-form">
         <input type="text" class="input" id="nickname" placeholder="Ваш ник в игре" required>
-        <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВКонтакте)" required>
-        <label for="agree">I agree to publish my prediction</label>
+        <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
+        <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
+        <label for="agree" class="agree">Согласен на публикацию прогноза</label>
         <input type="checkbox" id="agree" required>
-        <button type="submit">Submit Prediction</button>
+        
     </form>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
