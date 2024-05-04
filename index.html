@@ -10,8 +10,9 @@
             background-color: #171724;
             margin: 0;
             padding: 20px;
-   
+            width: 1020px;
             justify-content: center; 
+            text-align: center;
             font-family: "Arial Narrow", Arial, sans-serif;
         }
 
@@ -134,11 +135,14 @@
 {
     margin-left: 620px;
 }
-
-
+.Main
+{
+    width: 1020px;
+}
     </style>
 </head>
 <body>
+    <div class="Main">
     <div class="container">
         <div class="teams">
        
@@ -179,6 +183,7 @@
             <label for="agree" class="agree">Согласен на публикацию прогноза</label>
         </div>
     </form>
+    </div>
     
     
     <script>
@@ -252,17 +257,7 @@
                 console.log("Контакты:", socialLink);
 
 
-                // Дополнительная логика для отправки данных на сервер или Google таблицу
-                // fetch('url', {
-                //     method: 'POST',
-                //     body: JSON.stringify(prediction),
-                //     headers: {
-                //         'Content-Type': 'application/json'
-                //     }
-                // })
-                // .then(response => response.json())
-                // .then(data => console.log(data))
-                // .catch(error => console.error('Error:', error));
+
                 predictionForm.reset(); // Очистка формы после отправки
             });
         });
