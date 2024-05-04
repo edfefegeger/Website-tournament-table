@@ -10,14 +10,15 @@
             background-color: #171724;
             margin: 0;
             padding: 20px;
-            font-family: Arial, sans-serif;
-            justify-content: center; /* Выравнивание по горизонтали по центру */
+   
+            justify-content: center; 
+            font-family: "Arial Narrow", Arial, sans-serif;
         }
 
         .container {
             display: flex;
-            justify-content: center; /* Выравнивание по горизонтали по центру */
-            align-items: center; /* Выравнивание по вертикали по центру */
+            justify-content: center; 
+            align-items: center; 
             margin-left: 200px;
             margin-top: 100px;
         }
@@ -28,14 +29,14 @@
         }
 
         .team {
-            background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
+            background-color: rgba(211, 211, 211, 0); 
             padding: 10px;
             margin-bottom: 5px;
             cursor: move;
-            border: 3px solid rgba(255, 255, 255, 0.5); /* Тонкая белая окантовка */
+            border: 3px solid rgba(255, 255, 255, 0.5); 
             color: aliceblue;
-            border-radius: 8px; /* Радиус скругления углов */
-            font-weight: bold; /* Установка толщины шрифта */
+            border-radius: 8px;
+            font-weight: bold; 
         }
 
         .tournament {
@@ -50,16 +51,16 @@
         .team-slot {
             width: 150px;
             height: 50px;
-            border: 3px solid rgba(255, 255, 255, 0.5); /* Тонкая белая окантовка */
+            border: 3px solid rgba(255, 255, 255, 0.5); 
             margin-right: 10px;
-            margin-bottom: 20px; /* Отступ между полями в полуфинале */
+            margin-bottom: 20px; 
             display: flex;
             justify-content: center;
             align-items: center;
             color: white;
-            background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
-            border-radius: 8px; /* Радиус скругления углов */
-            font-weight: bold; /* Установка толщины шрифта */
+            background-color: rgba(211, 211, 211, 0); 
+            border-radius: 8px;
+            font-weight: bold; 
             width: 200px;
         }
 
@@ -78,13 +79,13 @@
         }
 
         #final {
-            flex-direction: column; /* Элементы располагаются вертикально вниз */
+            flex-direction: column; 
             margin-left: -260px;
             margin-top: 27px;
         }
 
         #semifinal {
-            flex-direction: column; /* Элементы располагаются вертикально вниз */
+            flex-direction: column; 
             margin-top: 20px;
         }
 
@@ -92,7 +93,7 @@
             margin-bottom: 40px;
             background-color: aliceblue;
             color: black;
-            font-weight: bold; /* Установка толщины шрифта */
+            font-weight: bold; 
             font-size: 25px;
         }
 
@@ -105,7 +106,7 @@
     color: aliceblue;
     width: 295px;
     height: 40px;
-    font-size: 14px; /* Установка размера текста */
+    font-size: 14px;
     border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 8px;
     
@@ -121,19 +122,26 @@
     height: 50px;
     border: 3px solid rgba(255, 255, 255, 0.5);
     border-radius: 8px;
-    background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
+    background-color: rgba(211, 211, 211, 0); 
     color: aliceblue;
     font-size: 20px;
 
     font-weight: bolder;
 
 }
+
+.checkbox-wrapper
+{
+    margin-left: 620px;
+}
+
+
     </style>
 </head>
 <body>
     <div class="container">
         <div class="teams">
-            <!-- Команды, которые можно перетаскивать -->
+       
             <div class="team" id="team_name"> ПОЛУФИНАЛ </div>
             <div class="team" draggable="true" id="team1">Beyond</div>
             <div class="team" draggable="true" id="team2">WhoCares?</div>
@@ -142,7 +150,7 @@
         </div>
         <div class="Grid_teams">
             <div class="tournament">
-                <!-- Полуфинал -->
+     
                 <div class="match" id="semifinal">
                     <div class="team-slot" id="team_name"> ФИНАЛ </div>
                     <div class="team-slot" id="slot1"><div id="semifinal-team1">Выберите команду ▾</div></div>
@@ -152,7 +160,7 @@
         </div>
         <div id="final">
             <div class="tournament">
-                <!-- Финал -->
+       
                 <div class="team-slot" id="team_name"> ПОБЕДИТЕЛЬ </div>
                 <div class="match">
                     <div class="team-slot" id="slot3"><div id="final-team">Выберите команду ▾</div></div>
@@ -160,22 +168,25 @@
             </div>
         </div>
     </div>
-    <!-- Форма для отправки прогнозов -->
+
     <form id="prediction-form">
         <input type="text" class="input" id="nickname" placeholder="Ваш ник в игре" required>
         <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
+    
         <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
-        <label for="agree" class="agree">Согласен на публикацию прогноза</label>
-        <input type="checkbox" id="agree" required>
-        
+        <div class="checkbox-wrapper">
+            <input type="checkbox" id="agree" required>
+            <label for="agree" class="agree">Согласен на публикацию прогноза</label>
+        </div>
     </form>
+    
+    
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const teams = document.querySelectorAll('.team');
             const teamSlots = document.querySelectorAll('.team-slot');
-            const selectedTeams = { semifinal: [], final: [] }; // объект для хранения выбранных команд
-        
-            // Добавляем обработчики для перетаскивания команд
+            const selectedTeams = { semifinal: [], final: [] }; 
+       
             teams.forEach(team => {
                 team.addEventListener('dragstart', dragStart);
             });
@@ -195,22 +206,22 @@
         
             function drop(e) {
                 e.preventDefault();
-                e.target.textContent = ''; // Очищаем текст в ячейке
+                e.target.textContent = ''; 
                 const teamId = e.dataTransfer.getData('text/plain');
                 const team = document.getElementById(teamId);
-                const newTeam = team.cloneNode(true); // Клонируем элемент команды
+                const newTeam = team.cloneNode(true); 
                 e.target.appendChild(newTeam);
         
-                // Определяем, в каком блоке находится ячейка (полуфинал или финал)
+              
                 const blockId = e.target.closest('.tournament').id;
-                // Определяем раунд (полуфинал или финал)
+            
                 const round = blockId === 'semifinal' ? 'semifinal' : 'final';
-                // Добавляем выбранную команду в соответствующий массив
+         
                 selectedTeams[round].push(team.textContent.trim());
 
             }
         
-            // Отправка прогноза
+
             const predictionForm = document.getElementById('prediction-form');
             predictionForm.addEventListener('submit', function(e) {
                 e.preventDefault();
@@ -221,22 +232,24 @@
                     nickname,
                     socialLink,
                     agree,
-                    selectedTeams // добавляем выбранные команды в объект прогноза
+                    selectedTeams 
                 };
-                // Отправляем прогноз на сервер (или в Google таблицу)
+                
                 console.log(prediction);
-                // Получение значений команд из объекта selectedTeams
-                const finalTeams = selectedTeams.final; // Массив команд в финале
+               
+                const finalTeams = selectedTeams.final; 
 
                 // Запись значений в переменные
                 const team1 = finalTeams[0];
                 const team2 = finalTeams[1];
                 const team3 = finalTeams[2];
 
-                // Использование полученных значений
+         
                 console.log("Первая команда в финале:", team1);
                 console.log("Вторая команда в финале:", team2);
                 console.log("Победитель:", team3);
+                console.log("Ник:",nickname );
+                console.log("Контакты:", socialLink);
 
 
                 // Дополнительная логика для отправки данных на сервер или Google таблицу
