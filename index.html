@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <h1 class='TITLE'>PICK'EM CHALLENGE</h1>
+    <!-- <h1 class='TITLE'>PICK'EM CHALLENGE</h1> -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tournament Predictions</title>
@@ -65,11 +65,11 @@
             width: 200px;
         }
 
-        .TITLE {
+        /* .TITLE {
             text-align: center;   
             color: aliceblue; 
             font-size: 50px;
-        }
+        } */
 
         #team2 {
             margin-bottom: 20px;
@@ -173,7 +173,8 @@
         </div>
     </div>
 
-    <form id="prediction-form">
+    <form id="prediction-form" method="POST"э
+  action="https://script.google.com/macros/s/AKfycbwJmLcHggeiqVouoh848KUbCJLkxj-68vwJncXNR-OHpfLb6wYYp4XaEMYSOxwfmVJj/exec">
         <input type="text" class="input" id="nickname" placeholder="Ваш ник в игре" required>
         <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
     
@@ -258,10 +259,33 @@
 
 
 
+
+
                 predictionForm.reset(); // Очистка формы после отправки
             });
         });
         
+        
             </script>
+            <form 
+            method="POST" 
+            action="https://script.google.com/macros/s/AKfycbwJmLcHggeiqVouoh848KUbCJLkxj-68vwJncXNR-OHpfLb6wYYp4XaEMYSOxwfmVJj/exec"
+          >
+            <input name="Email" type="email" placeholder="Email" required>
+            <input name="Name" type="text" placeholder="Name" required>
+            <button type="submit">Send</button>
+          </form>
+
+          <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbwjc4Vcp7YNvXp8hjWiCzNmcBS5n43p9qZa5tW7_iPEALirZX3KTWtrz4whRiZql_n-/exec">
+            <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре" required>
+            <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
+            <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
+            <div class="checkbox-wrapper">
+                <input type="checkbox" id="agree" required>
+                <label for="agree" class="agree">Согласен на публикацию прогноза</label>
+            </div>
+        </form>
+        
+          
 </body>
 </html>
