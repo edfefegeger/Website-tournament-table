@@ -276,15 +276,17 @@ predictionForm.addEventListener('submit', function(e) {
     </div>
     
 
-          <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbxEOplw3KT7CKICx4hUa1lRks-jqxQ-gRuGNvUiKzf6jkhw82AwESIYWMSPKb912nZv/exec">
-            <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре:" required>
-            <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК):" required>
-            <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
-            <div class="checkbox-wrapper">
-                <input type="checkbox" id="agree" required>
-                <label for="agree" class="agree">Согласен на публикацию прогноза</label>
-            </div>
-        </form>
+    <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbxEOplw3KT7CKICx4hUa1lRks-jqxQ-gRuGNvUiKzf6jkhw82AwESIYWMSPKb912nZv/exec">
+        <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре:" required>
+        <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК):" required>
+        <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
+        <div class="checkbox-wrapper">
+            <!-- Добавляем атрибут checked -->
+            <input type="checkbox" id="agree" name="agree" checked required>
+            <label for="agree" class="agree">Согласен на публикацию прогноза</label>
+        </div>
+    </form>
+    
         
           
 </body>
