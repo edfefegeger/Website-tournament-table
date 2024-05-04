@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <h1 class='TITLE'>PICK'EM CHALLENGE</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tournament Predictions</title>
+    <style>
+        body {
+            background-color: #171724;
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            justify-content: center; /* Выравнивание по горизонтали по центру */
+        }
+
+        .container {
+            display: flex;
+            justify-content: center; /* Выравнивание по горизонтали по центру */
+            align-items: center; /* Выравнивание по вертикали по центру */
+            margin-left: 200px;
+            margin-top: 100px;
+        }
+
+        .teams {
+            width: 200px;
+            text-align: center;
+        }
+
+        .team {
+            background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
+            padding: 10px;
+            margin-bottom: 5px;
+            cursor: move;
+            border: 3px solid rgba(255, 255, 255, 0.5); /* Тонкая белая окантовка */
+            color: aliceblue;
+            border-radius: 8px; /* Радиус скругления углов */
+            font-weight: bold; /* Установка толщины шрифта */
+        }
+
+        .tournament {
+            position: relative;
+            width: 500px;
+        }
+
+        .match {
+            display: flex;
+        }
+
+        .team-slot {
+            width: 150px;
+            height: 50px;
+            border: 3px solid rgba(255, 255, 255, 0.5); /* Тонкая белая окантовка */
+            margin-right: 10px;
+            margin-bottom: 20px; /* Отступ между полями в полуфинале */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            background-color: rgba(211, 211, 211, 0); /* Полностью прозрачный фон */
+            border-radius: 8px; /* Радиус скругления углов */
+            font-weight: bold; /* Установка толщины шрифта */
+            width: 200px;
+        }
+
+        .TITLE {
+            text-align: center;   
+            color: aliceblue; 
+            font-size: 50px;
+        }
+
+        #team2 {
+            margin-bottom: 20px;
+        }
+
+        .Grid_teams {
+            margin-left: 55px;
+        }
+
+        #final {
+            flex-direction: column; /* Элементы располагаются вертикально вниз */
+            margin-left: -260px;
+            margin-top: 27px;
+        }
+
+        #semifinal {
+            flex-direction: column; /* Элементы располагаются вертикально вниз */
+            margin-top: 20px;
+        }
+
+        #team_name {
+            margin-bottom: 40px;
+            background-color: aliceblue;
+            color: black;
+            font-weight: bold; /* Установка толщины шрифта */
+            font-size: 25px;
+        }
+
+        #prediction-form {
+            text-align: center;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="teams">
+            <!-- Команды, которые можно перетаскивать -->
+            <div class="team" id="team_name"> ПОЛУФИНАЛ </div>
+            <div class="team" draggable="true" id="team1">Beyond</div>
+            <div class="team" draggable="true" id="team2">WhoCares?</div>
+            <div class="team" draggable="true" id="team3">ENEMY</div>
+            <div class="team" draggable="true" id="team4">ALFA</div>
+        </div>
+        <div class="Grid_teams">
+            <div class="tournament">
+                <!-- Полуфинал -->
+                <div class="match" id="semifinal">
+                    <div class="team-slot" id="team_name"> ФИНАЛ </div>
+                    <div class="team-slot" id="slot1"><div id="semifinal-team1">Выберите команду ▾</div></div>
+                    <div class="team-slot" id="slot2"><div id="semifinal-team2">Выберите команду ▾</div></div>
+                </div>
+            </div>
+        </div>
+        <div id="final">
+            <div class="tournament">
+                <!-- Финал -->
+                <div class="team-slot" id="team_name"> ПОБЕДИТЕЛЬ </div>
+                <div class="match">
+                    <div class="team-slot" id="slot3"><div id="final-team">Выберите команду ▾</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Форма для отправки прогнозов -->
+    <form id="prediction-form">
+        <input type="text" class="input" id="nickname" placeholder="Ваш ник в игре" required>
+        <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВКонтакте)" required>
+        <label for="agree">I agree to publish my prediction</label>
+        <input type="checkbox" id="agree" required>
+        <button type="submit">Submit Prediction</button>
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const teams = document.querySelectorAll('.team');
+            const teamSlots = document.querySelectorAll('.team-slot');
+            const selectedTeams = { semifinal: [], final: [] }; // объект для хранения выбранных команд
+        
+            // Добавляем обработчики для перетаскивания команд
+            teams.forEach(team => {
+                team.addEventListener('dragstart', dragStart);
+            });
+        
+            teamSlots.forEach(slot => {
+                slot.addEventListener('dragover', dragOver);
+                slot.addEventListener('drop', drop);
+            });
+        
+            function dragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.id);
+            }
+        
+            function dragOver(e) {
+                e.preventDefault();
+            }
+        
+            function drop(e) {
+                e.preventDefault();
+                e.target.textContent = ''; // Очищаем текст в ячейке
+                const teamId = e.dataTransfer.getData('text/plain');
+                const team = document.getElementById(teamId);
+                const newTeam = team.cloneNode(true); // Клонируем элемент команды
+                e.target.appendChild(newTeam);
+        
+                // Определяем, в каком блоке находится ячейка (полуфинал или финал)
+                const blockId = e.target.closest('.tournament').id;
+                // Определяем раунд (полуфинал или финал)
+                const round = blockId === 'semifinal' ? 'semifinal' : 'final';
+                // Добавляем выбранную команду в соответствующий массив
+                selectedTeams[round].push(team.textContent.trim());
+
+            }
+        
+            // Отправка прогноза
+            const predictionForm = document.getElementById('prediction-form');
+            predictionForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const nickname = document.getElementById('nickname').value;
+                const socialLink = document.getElementById('social-link').value;
+                const agree = document.getElementById('agree').checked;
+                const prediction = {
+                    nickname,
+                    socialLink,
+                    agree,
+                    selectedTeams // добавляем выбранные команды в объект прогноза
+                };
+                // Отправляем прогноз на сервер (или в Google таблицу)
+                console.log(prediction);
+                // Получение значений команд из объекта selectedTeams
+                const finalTeams = selectedTeams.final; // Массив команд в финале
+
+                // Запись значений в переменные
+                const team1 = finalTeams[0];
+                const team2 = finalTeams[1];
+                const team3 = finalTeams[2];
+
+                // Использование полученных значений
+                console.log("Первая команда в финале:", team1);
+                console.log("Вторая команда в финале:", team2);
+                console.log("Победитель:", team3);
+
+
+                // Дополнительная логика для отправки данных на сервер или Google таблицу
+                // fetch('url', {
+                //     method: 'POST',
+                //     body: JSON.stringify(prediction),
+                //     headers: {
+                //         'Content-Type': 'application/json'
+                //     }
+                // })
+                // .then(response => response.json())
+                // .then(data => console.log(data))
+                // .catch(error => console.error('Error:', error));
+                predictionForm.reset(); // Очистка формы после отправки
+            });
+        });
+        
+            </script>
+</body>
+</html>
