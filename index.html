@@ -1,5 +1,85 @@
 <!DOCTYPE html>
 <html lang="en">
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const teams = document.querySelectorAll('.team');
+            const teamSlots = document.querySelectorAll('.team-slot');
+            const selectedTeams = { semifinal: [], final: [] }; 
+       
+            teams.forEach(team => {
+                team.addEventListener('dragstart', dragStart);
+            });
+        
+            teamSlots.forEach(slot => {
+                slot.addEventListener('dragover', dragOver);
+                slot.addEventListener('drop', drop);
+            });
+        
+            function dragStart(e) {
+                e.dataTransfer.setData('text/plain', e.target.id);
+            }
+        
+            function dragOver(e) {
+                e.preventDefault();
+            }
+        
+            function drop(e) {
+                e.preventDefault();
+                e.target.textContent = ''; 
+                const teamId = e.dataTransfer.getData('text/plain');
+                const team = document.getElementById(teamId);
+                const newTeam = team.cloneNode(true); 
+                e.target.appendChild(newTeam);
+        
+              
+                const blockId = e.target.closest('.tournament').id;
+            
+                const round = blockId === 'semifinal' ? 'semifinal' : 'final';
+         
+                selectedTeams[round].push(team.textContent.trim());
+
+            }
+        
+
+            const predictionForm = document.getElementById('prediction-form');
+            // predictionForm.addEventListener('submit', function(e) {
+            //     e.preventDefault();
+            //     const nickname = document.getElementById('nickname').value;
+            //     const socialLink = document.getElementById('social-link').value;
+            //     const agree = document.getElementById('agree').checked;
+            //     const prediction = {
+            //         nickname,
+            //         socialLink,
+            //         agree,
+            //         selectedTeams 
+            //     };
+                
+            //     console.log(prediction);
+               
+            //     const finalTeams = selectedTeams.final; 
+
+            //     // Запись значений в переменные
+            //     const team1 = finalTeams[0];
+            //     const team2 = finalTeams[1];
+            //     const team3 = finalTeams[2];
+
+         
+            //     console.log("Первая команда в финале:", team1);
+            //     console.log("Вторая команда в финале:", team2);
+            //     console.log("Победитель:", team3);
+            //     console.log("Ник:",nickname );
+            //     console.log("Контакты:", socialLink);
+
+
+
+
+
+                predictionForm.reset(); // Очистка формы после отправки
+            });
+        // });
+        
+        
+            </script>
 <head>
     <!-- <h1 class='TITLE'>PICK'EM CHALLENGE</h1> -->
     <meta charset="UTF-8">
@@ -173,108 +253,9 @@
         </div>
     </div>
 
-    <form id="prediction-form" method="POST"э
-  action="https://script.google.com/macros/s/AKfycbwJmLcHggeiqVouoh848KUbCJLkxj-68vwJncXNR-OHpfLb6wYYp4XaEMYSOxwfmVJj/exec">
-        <input type="text" class="input" id="nickname" placeholder="Ваш ник в игре" required>
-        <input type="text" class="input" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК)" required>
-    
-        <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
-        <div class="checkbox-wrapper">
-            <input type="checkbox" id="agree" required>
-            <label for="agree" class="agree">Согласен на публикацию прогноза</label>
-        </div>
-    </form>
+
     </div>
     
-    
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const teams = document.querySelectorAll('.team');
-            const teamSlots = document.querySelectorAll('.team-slot');
-            const selectedTeams = { semifinal: [], final: [] }; 
-       
-            teams.forEach(team => {
-                team.addEventListener('dragstart', dragStart);
-            });
-        
-            teamSlots.forEach(slot => {
-                slot.addEventListener('dragover', dragOver);
-                slot.addEventListener('drop', drop);
-            });
-        
-            function dragStart(e) {
-                e.dataTransfer.setData('text/plain', e.target.id);
-            }
-        
-            function dragOver(e) {
-                e.preventDefault();
-            }
-        
-            function drop(e) {
-                e.preventDefault();
-                e.target.textContent = ''; 
-                const teamId = e.dataTransfer.getData('text/plain');
-                const team = document.getElementById(teamId);
-                const newTeam = team.cloneNode(true); 
-                e.target.appendChild(newTeam);
-        
-              
-                const blockId = e.target.closest('.tournament').id;
-            
-                const round = blockId === 'semifinal' ? 'semifinal' : 'final';
-         
-                selectedTeams[round].push(team.textContent.trim());
-
-            }
-        
-
-            const predictionForm = document.getElementById('prediction-form');
-            predictionForm.addEventListener('submit', function(e) {
-                e.preventDefault();
-                const nickname = document.getElementById('nickname').value;
-                const socialLink = document.getElementById('social-link').value;
-                const agree = document.getElementById('agree').checked;
-                const prediction = {
-                    nickname,
-                    socialLink,
-                    agree,
-                    selectedTeams 
-                };
-                
-                console.log(prediction);
-               
-                const finalTeams = selectedTeams.final; 
-
-                // Запись значений в переменные
-                const team1 = finalTeams[0];
-                const team2 = finalTeams[1];
-                const team3 = finalTeams[2];
-
-         
-                console.log("Первая команда в финале:", team1);
-                console.log("Вторая команда в финале:", team2);
-                console.log("Победитель:", team3);
-                console.log("Ник:",nickname );
-                console.log("Контакты:", socialLink);
-
-
-
-
-
-                predictionForm.reset(); // Очистка формы после отправки
-            });
-        });
-        
-        
-            </script>
-            <form 
-            method="POST" 
-            action="https://script.google.com/macros/s/AKfycbwJmLcHggeiqVouoh848KUbCJLkxj-68vwJncXNR-OHpfLb6wYYp4XaEMYSOxwfmVJj/exec"
-          >
-            <input name="Email" type="email" placeholder="Email" required>
-            <input name="Name" type="text" placeholder="Name" required>
-            <button type="submit">Send</button>
-          </form>
 
           <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbwjc4Vcp7YNvXp8hjWiCzNmcBS5n43p9qZa5tW7_iPEALirZX3KTWtrz4whRiZql_n-/exec">
             <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре" required>
