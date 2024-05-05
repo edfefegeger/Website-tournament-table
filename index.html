@@ -48,13 +48,19 @@ function drop(e) {
     const semifinalTeam1Element = document.getElementById('semifinal-team1');
     const semifinalTeam2Element = document.getElementById('semifinal-team2');
 
-    if (!semifinalTeam1Element || !semifinalTeam2Element || semifinalTeam1Element.textContent.trim() === 'Выберите команду ▾' || semifinalTeam2Element.textContent.trim() === 'Выберите команду ▾') {
+    const team1 = document.getElementById('team1')
+    const team2 = document.getElementById('team2')
+    const team3 = document.getElementById('team3')
+    const team4 = document.getElementById('team4')
 
-        return;
-    }
 
     const slot1Team = semifinalTeam1Element.textContent.trim();
     const slot2Team = semifinalTeam2Element.textContent.trim();
+
+    const Team1slot = team1.textContent.trim();
+    const Team2slot = team2.textContent.trim();
+    const Team3slot = team3.textContent.trim();
+    const Team4slot = team4.textContent.trim();
 
     const finalTeam = team.textContent.trim();
 
@@ -65,11 +71,24 @@ function drop(e) {
         return;
     }
 
+
     if ( (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
         alert('Выберите команду для финала из полуфинала!');
         e.target.removeChild(newTeam); // Отменяем добавление победителя
         return;
     }
+    // if (round ==="final" && slot1Team !== Team1slot && slot1Team !== Team2slot)
+    // {
+    //     alert('Выберите верную команду для этого слота !');
+    //     e.target.removeChild(newTeam); // Отменяем добавление победителя
+    //     return;
+    // }
+    // if (round === "final" && slot2Team !== Team3slot && slot2Team !== Team4slot)
+    // {
+    //     alert('Выберите верную команду для этого слота !');
+    //     e.target.removeChild(newTeam); // Отменяем добавление победителя
+    //     return;
+    // }
 }
 
 
@@ -83,12 +102,16 @@ predictionForm.addEventListener('submit', function(e) {
     const nickname = document.getElementById('nickname').value;
     const socialLink = document.getElementById('social-link').value;
     const agree = document.getElementById('agree').checked;
+
+
+    
     const prediction = {
         nickname,
         socialLink,
         agree,
         selectedTeams 
     };
+
 
     console.log(prediction);
 
