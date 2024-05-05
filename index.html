@@ -55,9 +55,17 @@ function drop(e) {
 
     const slot1Team = semifinalTeam1Element.textContent.trim();
     const slot2Team = semifinalTeam2Element.textContent.trim();
+
     const finalTeam = team.textContent.trim();
 
-    if ((round === 'final') && (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
+    if (slot1Team == slot2Team)
+    {
+        alert('2 одинаковых команды выбрано в финале');
+        e.target.removeChild(newTeam); // Отменяем добавление победителя
+        return;
+    }
+
+    if ( (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
         alert('Выберите команду для финала из полуфинала!');
         e.target.removeChild(newTeam); // Отменяем добавление победителя
         return;
