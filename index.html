@@ -29,12 +29,6 @@ function drop(e) {
     e.target.textContent = ''; 
     const teamId = e.dataTransfer.getData('text/plain');
     const team = document.getElementById(teamId);
-
-    if (!team) {
-        console.error('Команда не найдена!');
-        return;
-    }
-
     const newTeam = team.cloneNode(true); 
     e.target.appendChild(newTeam);
 
@@ -54,8 +48,8 @@ function drop(e) {
     const semifinalTeam1Element = document.getElementById('semifinal-team1');
     const semifinalTeam2Element = document.getElementById('semifinal-team2');
 
-    if (!semifinalTeam1Element || !semifinalTeam2Element) {
-        console.error('Не удалось найти элементы полуфинала!');
+    if (!semifinalTeam1Element || !semifinalTeam2Element || semifinalTeam1Element.textContent.trim() === 'Выберите команду ▾' || semifinalTeam2Element.textContent.trim() === 'Выберите команду ▾') {
+
         return;
     }
 
