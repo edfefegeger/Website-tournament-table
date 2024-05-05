@@ -77,18 +77,18 @@ function drop(e) {
         e.target.removeChild(newTeam); // Отменяем добавление победителя
         return;
     }
-    // if (slot1Team !== Team1slot && slot1Team !== Team2slot)
-    // {
-    //     alert('Выберите верную команду для этого слота !');
-    //     e.target.removeChild(newTeam); // Отменяем добавление победителя
-    //     return;
-    // }
-    // if (round === "final" && slot2Team !== Team3slot && slot2Team !== Team4slot)
-    // {
-    //     alert('Выберите верную команду для этого слота !');
-    //     e.target.removeChild(newTeam); // Отменяем добавление победителя
-    //     return;
-    // }
+    if (slot1Team == Team3slot || slot1Team == Team4slot)
+    {
+        alert('Выберите верную команду для этого слота !');
+        e.target.removeChild(newTeam); // Отменяем добавление победителя
+        return;
+    }
+    if (slot2Team == Team1slot || slot2Team == Team2slot)
+    {
+        alert('Выберите верную команду для этого слота !');
+        e.target.removeChild(newTeam); // Отменяем добавление победителя
+        return;
+    }
 }
 
 
