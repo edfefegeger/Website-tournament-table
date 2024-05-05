@@ -45,8 +45,8 @@ function drop(e) {
     }
 
     // Проверяем, содержит ли команда слот требуемые команды
-    const semifinalTeam1Element = document.getElementById('semifinal-team1');
-    const semifinalTeam2Element = document.getElementById('semifinal-team2');
+    const semifinalTeam1Element = document.getElementById('slot1').querySelector('div');
+    const semifinalTeam2Element = document.getElementById('slot2').querySelector('div');
 
     const team1 = document.getElementById('team1')
     const team2 = document.getElementById('team2')
@@ -55,7 +55,7 @@ function drop(e) {
 
 
     const slot1Team = semifinalTeam1Element.textContent.trim();
-    const slot2Team = semifinalTeam2Element.textContent.trim();
+const slot2Team = semifinalTeam2Element.textContent.trim();
 
     const Team1slot = team1.textContent.trim();
     const Team2slot = team2.textContent.trim();
@@ -91,6 +91,7 @@ function drop(e) {
         e.target.removeChild(newTeam); // Отменяем добавление победителя
         return;
     }
+
 }
 
 
@@ -103,8 +104,9 @@ predictionForm.addEventListener('submit', function(e) {
     const agree = document.getElementById('agree').checked;
 
     // Проверяем, что все команды выбраны
-const semifinalTeam1Element = document.getElementById('semifinal-team1');
-const semifinalTeam2Element = document.getElementById('semifinal-team2');
+    const semifinalTeam1Element = document.getElementById('slot1').querySelector('div');
+    const semifinalTeam2Element = document.getElementById('slot2').querySelector('div');
+
 const finalTeamElement = document.getElementById('final-team');
 
 // Проверяем, что все команды выбраны
@@ -341,7 +343,7 @@ const finalTeam = finalTeamElement ? finalTeamElement.textContent.trim() : '';
     </div>
     
 
-    <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbyyaX-TaO0OVbINO46UowTcIMyGkzHNCngLpPJydZONSq0GhFVk7H9sUq2EUrMAxE2b/exec">
+    <form id="prediction-form" method="POST" action="https://script.google.com/macros/s/AKfycbwXVLNYpnZAkDBwHqez_6W0G_xT6zV_WD4AP5fnfsdBdiqhihbQaCtYy42wJE_e4vHL/exec">
         <input type="text" class="input" name="nickname" id="nickname" placeholder="Ваш ник в игре:" required>
         <input type="text" class="input" name="social-link" id="social-link" placeholder="Контакты для связи (Например ссылка на ВК):" required>
         <button type="submit" class="imagine_button">СДЕЛАТЬ ПРОГНОЗ</button>
