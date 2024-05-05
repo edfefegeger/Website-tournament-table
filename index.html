@@ -20,25 +20,45 @@ document.addEventListener("DOMContentLoaded", function() {
     e.target.style.border = 'none'; // Скрываем рамку при начале перетаскивания
 }
 
-    function dragOver(e) {
-        e.preventDefault();
+function dragOver(e) {
+    e.preventDefault();
+}
+
+function drop(e) {
+    e.preventDefault();
+    e.target.textContent = ''; 
+    const teamId = e.dataTransfer.getData('text/plain');
+    const team = document.getElementById(teamId);
+    const newTeam = team.cloneNode(true); 
+    e.target.appendChild(newTeam);
+
+    const blockId = e.target.closest('.tournament').id;
+
+    const round = blockId === 'semifinal' ? 'semifinal' : 'final';
+
+    selectedTeams[round].push(team.textContent.trim());
+
+    if (round === 'final' && selectedTeams['final'].length === 0) {
+        alert('Выберите команду для финала перед добавлением победителя!');
+        e.target.removeChild(newTeam); // Отменяем добавление победителя
+        return;
     }
 
-    function drop(e) {
-        e.preventDefault();
-        e.target.textContent = ''; 
-        const teamId = e.dataTransfer.getData('text/plain');
-        const team = document.getElementById(teamId);
-        const newTeam = team.cloneNode(true); 
-        e.target.appendChild(newTeam);
+    // Проверяем, содержит ли команда слот требуемые команды
+    const slot1Team = document.getElementById('semifinal-team1').textContent.trim();
+    const slot2Team = document.getElementById('semifinal-team2').textContent.trim();
+    const finalTeam = team.textContent.trim();
 
-        const blockId = e.target.closest('.tournament').id;
-
-        const round = blockId === 'semifinal' ? 'semifinal' : 'final';
-
-        selectedTeams[round].push(team.textContent.trim());
-
+    if ((round === 'final') && (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
+        alert('Выберите команду для финала из полуфинала!');
+        e.target.removeChild(newTeam); // Отменяем добавление победителя
+        return;
     }
+}
+
+
+
+
 
     const predictionForm = document.getElementById('prediction-form');
 predictionForm.addEventListener('submit', function(e) {
