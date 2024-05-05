@@ -75,12 +75,14 @@ function drop(e) {
     if ( (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
         alert('Выберите команду победителя из финала!');
         e.target.removeChild(newTeam); // Отменяем добавление победителя
+        
         return;
     }
     if (slot1Team == Team3slot || slot1Team == Team4slot)
     {
         alert('Выберите верную команду для этого слота !');
         e.target.removeChild(newTeam); // Отменяем добавление победителя
+        
         return;
     }
     if (slot2Team == Team1slot || slot2Team == Team2slot)
@@ -90,9 +92,6 @@ function drop(e) {
         return;
     }
 }
-
-
-
 
 
 
