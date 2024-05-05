@@ -73,11 +73,11 @@ function drop(e) {
 
 
     if ( (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
-        alert('Выберите команду для финала из полуфинала!');
+        alert('Выберите команду победителя из финала!');
         e.target.removeChild(newTeam); // Отменяем добавление победителя
         return;
     }
-    // if (round ==="final" && slot1Team !== Team1slot && slot1Team !== Team2slot)
+    // if (slot1Team !== Team1slot && slot1Team !== Team2slot)
     // {
     //     alert('Выберите верную команду для этого слота !');
     //     e.target.removeChild(newTeam); // Отменяем добавление победителя
