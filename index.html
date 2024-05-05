@@ -29,6 +29,12 @@ function drop(e) {
     e.target.textContent = ''; 
     const teamId = e.dataTransfer.getData('text/plain');
     const team = document.getElementById(teamId);
+
+    if (!team) {
+        console.error('Команда не найдена!');
+        return;
+    }
+
     const newTeam = team.cloneNode(true); 
     e.target.appendChild(newTeam);
 
@@ -45,8 +51,16 @@ function drop(e) {
     }
 
     // Проверяем, содержит ли команда слот требуемые команды
-    const slot1Team = document.getElementById('semifinal-team1').textContent.trim();
-    const slot2Team = document.getElementById('semifinal-team2').textContent.trim();
+    const semifinalTeam1Element = document.getElementById('semifinal-team1');
+    const semifinalTeam2Element = document.getElementById('semifinal-team2');
+
+    if (!semifinalTeam1Element || !semifinalTeam2Element) {
+        console.error('Не удалось найти элементы полуфинала!');
+        return;
+    }
+
+    const slot1Team = semifinalTeam1Element.textContent.trim();
+    const slot2Team = semifinalTeam2Element.textContent.trim();
     const finalTeam = team.textContent.trim();
 
     if ((round === 'final') && (finalTeam !== slot1Team && finalTeam !== slot2Team)) {
@@ -55,6 +69,7 @@ function drop(e) {
         return;
     }
 }
+
 
 
 
